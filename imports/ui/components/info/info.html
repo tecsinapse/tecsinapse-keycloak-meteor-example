@@ -1,0 +1,23 @@
+<template name="info">
+  <h2>Learn Meteor!</h2>
+  <div>
+    {{#if isLogged}}
+      <button class="js-get-users">Get Users</button>
+      <button class="js-logout">Logout</button>
+    {{else}}
+      <button class="js-login">Login</button>
+    {{/if}}
+  </div>
+  <ul>
+    <li>
+      <form class="info-link-add">
+        <input type="text" name="title" placeholder="Title" required>
+        <input type="url" name="url" placeholder="Url" required>
+        <input type="submit" name="submit" value="Add new link">
+      </form>
+    </li>
+    {{#each links}}
+      <li><a href="{{url}}" target="_blank">{{title}}</a></li>
+    {{/each}}
+  </ul>
+</template>
