@@ -1,0 +1,13 @@
+{
+  "public": {
+    "keycloak": {
+      "realm": "yourRealm",
+      "clientId": "yourClient",
+      "urlServer": "https://auth.yourKeycloak.com",
+      "adminUsername": "admin@yourUser.com",
+      "adminPassword": "yourAdminPass"
+    },
+    "username": "yourUser@yourDomain.com",
+    "password": "yourPass"
+  }
+}

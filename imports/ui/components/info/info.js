@@ -4,13 +4,6 @@ import TecSinapseKeycloak from 'tecsinapse-keycloak-js';
 
 import './info.html';
 
-const authParams = {
-  realm: 'test',
-  urlServer: 'https://auth.xxxkeycloak.com',
-  adminUsername: 'admin@xxxkeycloak.com.br',
-  adminPassword: 'pass@123'
-};
-
 Template.info.onCreated(function () {
   Meteor.subscribe('links.all');
 });
@@ -43,15 +36,15 @@ Template.info.events({
   },
   'click .js-login'(event) {
     event.preventDefault();
-    TecSinapseKeycloak.login('myuser@test.com', 'test#myuser', authParams)
+    TecSinapseKeycloak.login(Meteor.settings.public.username, Meteor.settings.public.password, Meteor.settings.public.keycloak)
       .then(result => {
         console.log(`success=${result}`);
       });
   },
-  'click .js-get-users'(event) {
+  'click .js-get-user-details'(event) {
     event.preventDefault();
 
-    TecSinapseKeycloak.getUser('myuser@test.com', authParams)
+    TecSinapseKeycloak.getUser(Meteor.settings.public.username, Meteor.settings.public.keycloak)
       .then(user => {
         console.log(`user.firstName=${user.firstName}, user.email=${user.email}`);
       });
@@ -59,6 +52,6 @@ Template.info.events({
   'click .js-logout'(event) {
     event.preventDefault();
 
-    TecSinapseKeycloak.logout();
+    TecSinapseKeycloak.logout(Meteor.settings.public.keycloak);
   },
 });
