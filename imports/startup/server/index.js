@@ -2,3 +2,4 @@
 
 import './fixtures.js';
 import './register-api.js';
+import './keycloakRegister.js';

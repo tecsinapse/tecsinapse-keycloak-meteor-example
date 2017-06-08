@@ -1,5 +1,6 @@
 import {Links} from '/imports/api/links/links.js';
 import {Meteor} from 'meteor/meteor';
+import {Accounts} from 'meteor/accounts-base';
 import TecSinapseKeycloak from 'tecsinapse-keycloak-js';
 
 import './info.html';
@@ -44,10 +45,11 @@ Template.info.events({
   'click .js-get-user-details'(event) {
     event.preventDefault();
 
-    TecSinapseKeycloak.getUser(Meteor.settings.public.username, Meteor.settings.public.keycloak)
-      .then(user => {
-        console.log(`user.firstName=${user.firstName}, user.email=${user.email}`);
-      });
+    // WIP
+    Accounts.loginWithKeycloak(Meteor.settings.public.username, Meteor.settings.public.password, (err) => {
+      console.log(`hello=${err}`);
+
+    });
   },
   'click .js-logout'(event) {
     event.preventDefault();
