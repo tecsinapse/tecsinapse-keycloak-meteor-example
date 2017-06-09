@@ -1,7 +1,6 @@
 import {Links} from '/imports/api/links/links.js';
 import {Meteor} from 'meteor/meteor';
 import {Accounts} from 'meteor/accounts-base';
-import TecSinapseKeycloak from 'tecsinapse-keycloak-js';
 
 import './info.html';
 
@@ -14,7 +13,7 @@ Template.info.helpers({
     return Links.find({});
   },
   isLogged() {
-    return TecSinapseKeycloak.isLogged();
+    return Accounts.isLogged();
   },
 });
 
@@ -37,23 +36,13 @@ Template.info.events({
   },
   'click .js-login'(event) {
     event.preventDefault();
-    TecSinapseKeycloak.login(Meteor.settings.public.username, Meteor.settings.public.password, Meteor.settings.public.keycloak)
-      .then(result => {
-        console.log(`success=${result}`);
-      });
+    Accounts.loginWithKeycloak(Meteor.settings.public.username, Meteor.settings.public.password);
   },
   'click .js-get-user-details'(event) {
     event.preventDefault();
-
-    // WIP
-    Accounts.loginWithKeycloak(Meteor.settings.public.username, Meteor.settings.public.password, (err) => {
-      console.log(`hello=${err}`);
-
-    });
   },
   'click .js-logout'(event) {
     event.preventDefault();
-
-    TecSinapseKeycloak.logout(Meteor.settings.public.keycloak);
+    Accounts.logoutKeycloak();
   },
 });
