@@ -45,4 +45,8 @@ Template.info.events({
     event.preventDefault();
     Accounts.logoutKeycloak();
   },
+  'click .js-getroles'(event) {
+    event.preventDefault();
+    Accounts.getRoles().then(roles => console.log(roles));
+  },
 });
